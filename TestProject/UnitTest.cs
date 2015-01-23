@@ -46,7 +46,7 @@
 
         private static void Teste(Type teilnehmer, Testboard testboard)
         {
-            var ergebnis = RunTest(testboard.Board, testboard.Start, testboard.Ende, (IDnp1501Solution)Activator.CreateInstance(teilnehmer));
+            var ergebnis = RunTest(testboard.Board, testboard.Start, testboard.Ende, teilnehmer);
             Trace.WriteLine(testboard.Name + "   Dauer:  " + ergebnis.Item2);
             Assert.AreEqual(testboard.Schritte, ergebnis.Item1, " Board: "+ testboard.Name);
         }
@@ -72,8 +72,8 @@
             double dauer2 = 0;
             for (int i = 0; i < durchläufe; i++)
             {
-                var ergebnis1 = RunTest(testboard.Board, testboard.Start, testboard.Ende, (IDnp1501Solution)Activator.CreateInstance(teilnehmer1));
-                var ergebnis2 = RunTest(testboard.Board, testboard.Start, testboard.Ende, (IDnp1501Solution)Activator.CreateInstance(teilnehmer2));
+                var ergebnis1 = RunTest(testboard.Board, testboard.Start, testboard.Ende, teilnehmer1);
+                var ergebnis2 = RunTest(testboard.Board, testboard.Start, testboard.Ende, teilnehmer2);
 
                 dauer1 += ergebnis1.Item2;
                 dauer2 += ergebnis2.Item2;
@@ -82,11 +82,12 @@
         }
 
         private static Tuple<int, double> RunTest(BoolArray board, Point start, Point ende,
-            IDnp1501Solution algorithm)
+            Type teilnehmer)
         {
             var pos = 0;
             var sw = new Stopwatch();
             sw.Start();
+            IDnp1501Solution algorithm = (IDnp1501Solution)Activator.CreateInstance(teilnehmer);
             Point current = null;
             algorithm.MakeMove +=
                 point =>
