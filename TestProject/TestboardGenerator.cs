@@ -11,21 +11,25 @@
     {
         public static IEnumerable<Testboard> Boards()
         {
-            yield return GenerateLeeresBoard(new BoolArray());
-            yield return GenerateEinSchritt(new BoolArray());
-            yield return GenerateZufall1(new BoolArray());
-            yield return GenerateZufall2(new BoolArray());
-            yield return GenerateZufall3(new BoolArray());
-            yield return GenerateZufallsweg(new BoolArray());
-            yield return GenerateAufgabe(new BoolArray());
-            yield return GenerateLabyrinth(new BoolArray());
-            yield return GenerateVerschmutztesLabyrinth(new BoolArray());
-            yield return GenerateVerschmutztesLabyrinth1(new BoolArray());
-            yield return GenerateMaximalerWeg(new BoolArray());
-            yield return GenerateBoardLabyrinth1(new BoolArray());
-            yield return GenerateBoardLabyrinthTricky(new BoolArray());
+            //yield return GenerateLeeresBoard(new BoolArray());
+            //yield return GenerateEinSchritt(new BoolArray());
+            //yield return GenerateZufall1(new BoolArray());
+            //yield return GenerateZufall2(new BoolArray());
+            //yield return GenerateZufall3(new BoolArray());
+            //yield return GenerateZufallsweg(new BoolArray());
+            //yield return GenerateAufgabe(new BoolArray());
+            //yield return GenerateLabyrinth(new BoolArray());
+            //yield return GenerateVerschmutztesLabyrinth(new BoolArray());
+            //yield return GenerateVerschmutztesLabyrinth1(new BoolArray());
+            //yield return GenerateMaximalerWeg(new BoolArray());
+            //yield return GenerateBoardLabyrinth1(new BoolArray());
+            //yield return GenerateBoardLabyrinthTricky(new BoolArray());
             yield return GenerateBoardLabyrinthTricky2(new BoolArray());
-            yield return GenerateTestboard(new BoolArray());
+            //yield return GenerateTestboard(new BoolArray());
+            //yield return GenerateWorstCaseBeideRichtungen1(new BoolArray());
+            //yield return GenerateWorstCaseBeideRichtungen2(new BoolArray());
+            //yield return GenerateWorstCaseEnde(new BoolArray());
+            //yield return GenerateWorstCaseAnfang(new BoolArray());
         }
 
         private static readonly Point Startpunkt = new Point { x = 0, y = 0 };
@@ -168,6 +172,50 @@
             return new Testboard { Name = "Maximaler Weg", Board = board, Start = Startpunkt, Ende = new Point { x = 1023, y = 0 }, Schritte = 523776 };
         }
 
+        public static Testboard GenerateWorstCaseBeideRichtungen1(BoolArray board)
+        {
+            for (int x = 0; x < 1022; x++)
+            {
+                board.Data[x, 1] = true;
+            }
+            for (int y = 0; y < 1022; y++)
+            {
+                board.Data[1022, y + 1] = true;
+            }
+            return new Testboard { Name = "Worst Case Suche von Anfang und Ende 1", Board = board, Start = Startpunkt, Ende = Endpunkt, Schritte = 2045 };
+        }
+
+        public static Testboard GenerateWorstCaseBeideRichtungen2(BoolArray board)
+        {
+            for (int x = 0; x < 1022; x++)
+            {
+                board.Data[x, 1] = true;
+            }
+            for (int y = 0; y < 1022; y++)
+            {
+                board.Data[1022, y + 1] = true;
+            }
+            return new Testboard { Name = "Worst Case Suche von Anfang und Ende 2", Board = board, Start = Endpunkt, Ende = Startpunkt, Schritte = 2045 };
+        }
+
+        public static Testboard GenerateWorstCaseEnde(BoolArray board)
+        {
+            for (int x = 0; x < 1023; x++)
+            {
+                board.Data[x, 1] = true;
+            }
+            return new Testboard { Name = "Worst Case Suche vom Ende", Board = board, Start = Startpunkt, Ende = new Point { x = 1023, y = 0 }, Schritte = 1023 };
+        }
+
+        public static Testboard GenerateWorstCaseAnfang(BoolArray board)
+        {
+            for (int x = 0; x < 1023; x++)
+            {
+                board.Data[x, 1] = true;
+            }
+            return new Testboard { Name = "Worst Case Suche vom Anfang", Board = board, Start = new Point { x = 1023, y = 0 }, Ende = Startpunkt, Schritte = 1023 };
+        }
+
         public static Testboard GenerateLabyrinth(BoolArray board)
         {
             var b = Resources.labyrinth;
@@ -230,7 +278,7 @@
             {
                 board.Data[r.Next(0, 1024), r.Next(0, 1024)] = true;
             }
-            return new Testboard { Name = "Verschmutztes Labyrinth", Board = board, Start = new Point { x = 511, y = 0 }, Ende = new Point { x = 511, y = 511 }, Schritte = 20853 };
+            return new Testboard { Name = "Verschmutztes Labyrinth", Board = board, Start = new Point { x = 511, y = 0 }, Ende = new Point { x = 511, y = 512 }, Schritte = 20853 };
         }
 
         public static Testboard GenerateVerschmutztesLabyrinth1(BoolArray board)

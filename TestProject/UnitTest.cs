@@ -27,11 +27,28 @@
         }
 
         [TestMethod]
+        public void Hlawatsch()
+        {
+            this.Teste(typeof(Dnp012015.Hlawatsch.Solution));
+        }
+
+        [TestMethod]
+        public void Petz()
+        {
+            this.Teste(typeof(Dnp012015.Petz.Solution));
+        }
+
+        [TestMethod]
         public void Buchmann_Gegen_Beetz()
         {
             this.VergleicheTeilnehmer(typeof(Dnp012015.Buchmann.Solution), typeof(Dnp012015.Beetz.Solution), 20);
         }
 
+        [TestMethod]
+        public void Buchmann_Gegen_Petz()
+        {
+            this.VergleicheTeilnehmer(typeof(Dnp012015.Buchmann.Solution), typeof(Dnp012015.Petz.Solution), 20);
+        }
 
         public void Teste(Type teilnehmer)
         {
@@ -97,7 +114,7 @@
                 };
             algorithm.Start(board, start, ende);
             // sw.Restart();
-            while (!current.IsEqual(ende))
+            while (!current.IsEqual(ende) && pos < 1048576)
             {
                 algorithm.NextStep();
             }

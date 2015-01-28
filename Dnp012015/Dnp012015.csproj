@@ -70,7 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beetz.cs" />
+    <Compile Include="Hlawatsch.cs" />
     <Compile Include="Mojado.cs" />
+    <Compile Include="Petz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Buchmann.cs" />
   </ItemGroup>
