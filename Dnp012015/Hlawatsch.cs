@@ -94,7 +94,8 @@ namespace Dnp012015.Hlawatsch
         {
             bool result = p.x >= 0 && p.x < dimx
                 && p.y >= 0 && p.y < dimy
-                && !ground.IsTrue(p.x, p.y);
+                //&& !ground.IsTrue(p.x, p.y);
+                && !ground.IsTrue(new Point(){x=p.x, y=p.y});
 
             return result;
         }

@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="contest.submission.contract">
-      <HintPath>..\A1501contestAufgabe\bin\dnp1501\Muster\contest.submission.contract.dll</HintPath>
+      <HintPath>..\contest.submission.contract\contest.submission.contract.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
